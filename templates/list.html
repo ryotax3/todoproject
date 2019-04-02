@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Todolist</h1>
+        <p class="lead">Todolistを作って毎日を効率的に過ごしましょう。</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class='container'>
+    <a href="{% url 'create' %}" class="btn btn-info" tabindex="-1" role="button" aria-disabled="true">新規作成</a>
+    {% for item in object_list %}
+    <div class="alert alert-{{ item.priority }}" role="alert">
+        <p>{{ item.title }}　期日：{{ item.duedate }}</p>
+        <a href="{% url 'update' item.pk  %}" class="btn btn-info" tabindex="-1" role="button"
+            aria-disabled="true">編集</a>
+        <a href="{% url 'delete' item.pk %}" class="btn btn-primary" tabindex="-1" role="button"
+            aria-disabled="true">削除</a>
+        <a href="{% url 'detail' item.pk %}" class="btn btn-success" tabindex="-1" role="button"
+            aria-disabled="true">詳細</a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
